@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<title>The Psychic Game</title>
+		<meta charset="utf-8">
+	</head>
+	<body>
+		<h1>The Pyschic Game</h1>
+		<div>Guess what letter I'm thinking of!</div>
+		<div>Wins: <span id="winCount">0</span></div>
+		<div>Losses: <span id="lossCount">0</span></div>
+		<div>Guesses left: <span id="guessesLeft">0</span></div>
+		<div>Letters guessed so far: <span id="wrongChoices"></span></div>
+
+		<script type="text/javascript">
+		//the array that holds the possibilites of the computers guesses
+		var compChoices = ['a','b', 'c', 'd', 'e', 'f', 'g', 'h'];
+
+		//these variables initiate at the start of the game
+		var wins = 0, 
+			losses = 0, 
+			guesses = 9;
+
+		//this line inserts the variable for wins into the html
+		var winCountSpan = document.getElementById('winCount'),
+
+			//this line inserts the variable for losses into the html
+			lossCountSpan = document.getElementById('lossCount'),
+
+			//this line inserts the variable for guesses left in
+			guessesLeftSpan = document.getElementById('guessesLeft'),
+
+			//these lines keep track of all the wrong guesses you make
+			wrongChoicesSpan = document.getElementById('wrongChoices');
+
+		//this function starts the game on key up
+		document.onkeydown = function(event) {
+
+		//I have assigned my any key press to userGuess
+		var userGuess = event.key;
+
+		//this documents wins
+		winCountSpan.innerHTML = "<em>" + wins + "</em>";
+
+		//this documetns losses
+		lossCountSpan.innerHTML = "<em>" + losses + "</em>";
+
+		//this documents remaining guesses
+		guessesLeftSpan.innerHTML = "<em>" + guesses + "</em>";
+
+		//this documents guesses
+		wrongChoicesSpan.appendChild(document.createTextNode(userGuess +', '));
+
+
+			//This line chooses which letter is chosen by the computer
+			compGuess = compChoices[Math.floor(Math.random() * compChoices.length)];
+
+			//these commands determine the wins or losses of this game
+			//you win
+			if (userGuess === compGuess) {
+				wins++;
+				guesses = 9;
+				wrongChoicesSpan.innerHTML = "";
+				alert("You Win!");
+
+			//you lost :(
+			} else if (userGuess !== compGuess) {
+				guesses--;
+
+				//game over and game restart mechanic
+				if (guesses === 0) {
+				alert("game over");
+				guesses = 9;
+				wrongChoicesSpan.innerHTML = "";
+				losses++;	
+				}
+			}
+		}			
+	</script>
+	</body>
+	
+</html>
