@@ -5,13 +5,15 @@
 		<meta charset="utf-8">
 	</head>
 	<body>
-		<h1>The Pyschic Game</h1>
+		<div id="game">
+			<p>Press any button between a and h to start!</p>
+		</div>
+		<!-- <h1>The Pyschic Game</h1>
 		<div>Guess what letter I'm thinking of!</div>
 		<div>Wins: <span id="winCount">0</span></div>
 		<div>Losses: <span id="lossCount">0</span></div>
 		<div>Guesses left: <span id="guessesLeft">0</span></div>
-		<div>Letters guessed so far: <span id="wrongChoices"></span></div>
-
+		<div>Letters guessed so far: <span id="wrongChoices"></span></div> -->
 		<script type="text/javascript">
 		//the array that holds the possibilites of the computers guesses
 		var compChoices = ['a','b', 'c', 'd', 'e', 'f', 'g', 'h'];
@@ -21,17 +23,17 @@
 			losses = 0, 
 			guesses = 9;
 
-		//this line inserts the variable for wins into the html
-		var winCountSpan = document.getElementById('winCount'),
+		// //this line inserts the variable for wins into the html
+		// var winCountSpan = document.getElementById('winCount'),
 
-			//this line inserts the variable for losses into the html
-			lossCountSpan = document.getElementById('lossCount'),
+		// 	//this line inserts the variable for losses into the html
+		// 	lossCountSpan = document.getElementById('lossCount'),
 
-			//this line inserts the variable for guesses left in
-			guessesLeftSpan = document.getElementById('guessesLeft'),
+		// 	//this line inserts the variable for guesses left in
+		// 	guessesLeftSpan = document.getElementById('guessesLeft'),
 
-			//these lines keep track of all the wrong guesses you make
-			wrongChoicesSpan = document.getElementById('wrongChoices');
+		// 	//these lines keep track of all the wrong guesses you make
+		// 	wrongChoicesSpan = document.getElementById('wrongChoices');
 
 		//this function starts the game on key up
 		document.onkeydown = function(event) {
@@ -39,42 +41,57 @@
 		//I have assigned my any key press to userGuess
 		var userGuess = event.key;
 
-		//this documents wins
-		winCountSpan.innerHTML = "<em>" + wins + "</em>";
+		// //this documents wins
+		// winCountSpan.innerHTML = "<em>" + wins + "</em>";
 
-		//this documetns losses
-		lossCountSpan.innerHTML = "<em>" + losses + "</em>";
+		// //this documetns losses
+		// lossCountSpan.innerHTML = "<em>" + losses + "</em>";
 
-		//this documents remaining guesses
-		guessesLeftSpan.innerHTML = "<em>" + guesses + "</em>";
+		// //this documents remaining guesses
+		// guessesLeftSpan.innerHTML = "<em>" + guesses + "</em>";
 
-		//this documents guesses
-		wrongChoicesSpan.appendChild(document.createTextNode(userGuess +', '));
+		// //this documents guesses
+		// wrongChoicesSpan.appendChild(document.createTextNode(userGuess +', '));
 
 
 			//This line chooses which letter is chosen by the computer
 			compGuess = compChoices[Math.floor(Math.random() * compChoices.length)];
 
 			//these commands determine the wins or losses of this game
-			//you win
+
+			//this is what happens when you when
 			if (userGuess === compGuess) {
 				wins++;
 				guesses = 9;
-				wrongChoicesSpan.innerHTML = "";
+				userGuess = "";
 				alert("You Win!");
 
-			//you lost :(
+			//this is what happens when you make a wrong guess
 			} else if (userGuess !== compGuess) {
 				guesses--;
+				userGuess = document.insert(userGuess);
+				
+
 
 				//game over and game restart mechanic
 				if (guesses === 0) {
 				alert("game over");
 				guesses = 9;
-				wrongChoicesSpan.innerHTML = "";
+				userGuess = "";
 				losses++;	
 				}
 			}
+		//this displays the input and tracks the games progress
+		var html =
+			"<h1>The Psychic Game</h1>" +
+			"<p>Guess What Letter I am thinking</p>" +
+         	"<p>wins: " + wins + "</p>" +
+         	"<p>losses: " + losses + "</p>" +
+         	"<p>remaining guesses: " + guesses + "</p>" +
+         	"<p>Letters you have guessed so far: " + userGuess + "</p>";
+
+        // Set the inner HTML contents of the #game div to our html string
+        document.querySelector("#game").innerHTML = html;
 		}			
 	</script>
 	</body>
