@@ -23,21 +23,26 @@
 
 		//I have assigned my any key press to userGuess
 		var userGuess = event.key,
-			guessedLetter = (userGuess.);
+			guessedLetter = (userGuess);
 
 		//functino for game win
 		function gameWin() {
 			guesses = 9;
-			guessedLetter = [a];
+			guessedLetter = [];
 			wins++;
 			alert("You Win!");
+		}
+
+		//function for a wrong guess
+		function wrongGuess() {
+			guesses--;
 		}
 
 		//function for game loss
 		function gameLoss() {
 			alert("game over");
 			guesses = 9;
-			guessedLetter = [a];
+			guessedLetter = [];
 			losses++;
 		}
 
@@ -52,7 +57,7 @@
 				
 			//this is what happens when you make a wrong guess
 			} else if (userGuess !== compGuess) {
-				guesses--;
+				wrongGuess();
 				
 				//this is what happens when you lose the game
 				if (guesses === 0) {
