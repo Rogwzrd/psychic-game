@@ -14,7 +14,7 @@
 
 		<script type="text/javascript">
 		//the array that holds the possibilites of the computers guesses
-		var compChoices = ['a','b', 'c', 'd', 'e', 'f', 'g', 'h'];
+		var compChoices = ['a','b', 'c', 'd', 'e', 'f', 'g', 'h', "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 
 		//these variables initiate at the start of the game
 		var wins = 0, 
@@ -36,46 +36,58 @@
 		//this function starts the game on key up
 		document.onkeydown = function(event) {
 
-		//I have assigned my any key press to userGuess
-		var userGuess = event.key;
+			//I have assigned my any key press to userGuess
+			var userGuess = event.key;
 
-		//this documents wins
-		winCountSpan.innerHTML = "<em>" + wins + "</em>";
+			//this documents wins
+			winCountSpan.innerHTML = "<em>" + wins + "</em>";
 
-		//this documetns losses
-		lossCountSpan.innerHTML = "<em>" + losses + "</em>";
+			//this documetns losses
+			lossCountSpan.innerHTML = "<em>" + losses + "</em>";
 
-		//this documents remaining guesses
-		guessesLeftSpan.innerHTML = "<em>" + guesses + "</em>";
+			//this documents remaining guesses
+			guessesLeftSpan.innerHTML = "<em>" + guesses + "</em>";
 
-		//this documents guesses
-		wrongChoicesSpan.appendChild(document.createTextNode(userGuess +', '));
-
+			//this documents guesses
+			wrongChoicesSpan.appendChild(document.createTextNode(userGuess +', '));
 
 			//This line chooses which letter is chosen by the computer
 			compGuess = compChoices[Math.floor(Math.random() * compChoices.length)];
 
-			//these commands determine the wins or losses of this game
-			//you win
-			if (userGuess === compGuess) {
+			function gameWin() {
 				wins++;
+			}
+
+			function gameLoss() {
+				losses++;	
+			}
+
+			function gamereset() {
 				guesses = 9;
 				wrongChoicesSpan.innerHTML = "";
-				alert("You Win!");
+			}
 
-			//you lost :(
-			} else if (userGuess !== compGuess) {
+			function wrongGuess() {
 				guesses--;
+			}
+
+			//these commands determine the wins or losses of this game
+			//this is what happen when you win
+			if (userGuess === compGuess) {
+				gameWin();
+				gamereset();
+
+			//this is what happens when you make a wrong guess
+			} else if (userGuess !== compGuess) {
+				wrongGuess();
 
 				//game over and game restart mechanic
-				if (guesses === 0) {
-				alert("game over");
-				guesses = 9;
-				wrongChoicesSpan.innerHTML = "";
-				losses++;	
+				if (guesses == 0) {
+					gameLoss();
+					gamereset();
 				}
 			}
-		}			
+		}
 	</script>
 	</body>
 	
