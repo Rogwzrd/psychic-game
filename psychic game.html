@@ -16,14 +16,16 @@
 		//these variables initiate at the start of the game
 		var wins = 0, 
 			losses = 0, 
-			guesses = 9;
+			guesses = 9,
+			guessedLetter = [],
+			userGuess = null;
 
 		//this function starts the game on key up
 		document.onkeydown = function(event) {
 
 		//I have assigned my any key press to userGuess
-		var userGuess = event.key,
-			guessedLetter = (userGuess);
+		userGuess = event.key,
+		guessedLetter.push(userGuess);
 
 		//functino for game win
 		function gameWin() {
@@ -40,10 +42,10 @@
 
 		//function for game loss
 		function gameLoss() {
-			alert("game over");
 			guesses = 9;
 			guessedLetter = [];
 			losses++;
+			alert("game over");
 		}
 
 			//This line chooses which letter is chosen by the computer
