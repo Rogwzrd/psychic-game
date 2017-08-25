@@ -1,94 +1,100 @@
 <!DOCTYPE html>
 <html lang="en-us">
-	<head>
-		<title>The Psychic Game</title>
-		<meta charset="utf-8">
-	</head>
-	<body>
-		<h1>The Pyschic Game</h1>
-		<div>Guess what letter I'm thinking of!</div>
-		<div>Wins: <span id="winCount">0</span></div>
-		<div>Losses: <span id="lossCount">0</span></div>
-		<div>Guesses left: <span id="guessesLeft">0</span></div>
-		<div>Letters guessed so far: <span id="wrongChoices"></span></div>
 
-		<script type="text/javascript">
-		//the array that holds the possibilites of the computers guesses
-		var compChoices = ['a','b', 'c', 'd', 'e', 'f', 'g', 'h', "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+<head>
+    <title>The Psychic Game</title>
+    <meta charset="utf-8">
+</head>
 
-		//these variables initiate at the start of the game
-		var wins = 0, 
-			losses = 0, 
-			guesses = 9;
+<body>
+    <h1>The Pyschic Game</h1>
+    <div>Guess what letter I'm thinking of!</div>
+    <div>Wins: <span id="winCount">0</span></div>
+    <div>Losses: <span id="lossCount">0</span></div>
+    <div>Guesses left: <span id="guessesLeft">0</span></div>
+    <div>Letters guessed so far: <span id="wrongChoices"></span></div>
+    <script type="text/javascript">
+    //the array that holds the possibilites of the computers guesses
+    var compChoices = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 
-		//this line inserts the variable for wins into the html
-		var winCountSpan = document.getElementById('winCount'),
+    //these variables initiate at the start of the game
+    var wins = 0,
+        losses = 0,
+        guesses = 9;
 
-			//this line inserts the variable for losses into the html
-			lossCountSpan = document.getElementById('lossCount'),
+    //this line inserts the variable for wins into the html
+    var winCountSpan = document.getElementById('winCount'),
 
-			//this line inserts the variable for guesses left in
-			guessesLeftSpan = document.getElementById('guessesLeft'),
+        //this line inserts the variable for losses into the html
+        lossCountSpan = document.getElementById('lossCount'),
 
-			//these lines keep track of all the wrong guesses you make
-			wrongChoicesSpan = document.getElementById('wrongChoices');
+        //this line inserts the variable for guesses left in
+        guessesLeftSpan = document.getElementById('guessesLeft'),
 
-		//this function starts the game on key up
-		document.onkeydown = function(event) {
+        //these lines keep track of all the wrong guesses you make
+        wrongChoicesSpan = document.getElementById('wrongChoices');
 
-			//I have assigned my any key press to userGuess
-			var userGuess = event.key;
+    function gameWin() {
+        wins++;
+    }
 
-			//this documents wins
-			winCountSpan.innerHTML = "<em>" + wins + "</em>";
+    function gameLoss() {
+        losses++;
+    }
 
-			//this documetns losses
-			lossCountSpan.innerHTML = "<em>" + losses + "</em>";
+    function gamereset() {
+        guesses = 9;
+        wrongChoicesSpan.innerHTML = "";
+    }
 
-			//this documents remaining guesses
-			guessesLeftSpan.innerHTML = "<em>" + guesses + "</em>";
+    function wrongGuess() {
+        guesses--;
+        //game over and game restart mechanic
+        if (guesses == 0) {
+            gameLoss();
+        }
+    }
 
-			//this documents guesses
-			wrongChoicesSpan.appendChild(document.createTextNode(userGuess +', '));
+    //this function starts the game on key up
+    document.onkeydown = function(event) {
+    	// hit any key to play again
+    	if (guesses == 0) {
+            gamereset();
+            return;
+        }
 
-			//This line chooses which letter is chosen by the computer
-			compGuess = compChoices[Math.floor(Math.random() * compChoices.length)];
+        //I have assigned my any key press to userGuess
+        var userGuess = event.key;
 
-			function gameWin() {
-				wins++;
-			}
+        //This line chooses which letter is chosen by the computer
+        compGuess = compChoices[Math.floor(Math.random() * compChoices.length)];
 
-			function gameLoss() {
-				losses++;	
-			}
+        //these commands determine the wins or losses of this game
+        //this is what happen when you win
+        if (userGuess === compGuess) {
+            gameWin();
+            gamereset();
 
-			function gamereset() {
-				guesses = 9;
-				wrongChoicesSpan.innerHTML = "";
-			}
+            //this is what happens when you make a wrong guess
+        } else {
+            wrongGuess();
+        }
 
-			function wrongGuess() {
-				guesses--;
-			}
+        //this documents wins
+        winCountSpan.innerHTML = "<em>" + wins + "</em>";
 
-			//these commands determine the wins or losses of this game
-			//this is what happen when you win
-			if (userGuess === compGuess) {
-				gameWin();
-				gamereset();
+        //this documetns losses
+        lossCountSpan.innerHTML = "<em>" + losses + "</em>";
 
-			//this is what happens when you make a wrong guess
-			} else if (userGuess !== compGuess) {
-				wrongGuess();
+        //this documents remaining guesses
+        guessesLeftSpan.innerHTML = "<em>" + guesses + "</em>";
 
-				//game over and game restart mechanic
-				if (guesses == 0) {
-					gameLoss();
-					gamereset();
-				}
-			}
-		}
-	</script>
-	</body>
-	
+        //this documents guesses
+        wrongChoicesSpan.appendChild(document.createTextNode(userGuess + ', '));
+
+
+    }
+    </script>
+</body>
+
 </html>
