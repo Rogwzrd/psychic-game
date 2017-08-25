@@ -27,6 +27,7 @@
 		userGuess = event.key,
 		guessedLetter.push(userGuess);
 
+
 		//functino for game win
 		function gameWin() {
 			guesses = 9;
@@ -51,32 +52,35 @@
 		//This line chooses which letter is chosen by the computer
 		compGuess = compChoices[Math.floor(Math.random() * compChoices.length)];
 
-			//these commands determine the wins or losses of this game
+			// if (guessedLetter.indexOf(userGuess) >= 0) {
 
-			//this is what happens when you when win
-			if (userGuess === compGuess) {
-				gameWin();
-				
-			//this is what happens when you make a wrong guess
-			} else if (userGuess !== compGuess) {
-				wrongGuess();
-				
-				//this is what happens when you lose the game
-				if (guesses === 0) {
-				gameLoss();	
+				//these commands determine the wins or losses of this game
+
+				//this is what happens when you when win
+				if (userGuess === compGuess) {
+					gameWin();
+					
+				//this is what happens when you make a wrong guess
+				} else if (userGuess !== compGuess) {
+					wrongGuess();
+					
+					//this is what happens when you lose the game
+					if (guesses === 0) {
+					gameLoss();	
+					}
 				}
-			}
-		//this displays the input and tracks the games progress
-		var html =
-			"<h1>The Psychic Game</h1>" +
-			"<p>Guess What Letter I am thinking</p>" +
-         	"<p>wins: " + wins + "</p>" +
-         	"<p>losses: " + losses + "</p>" +
-         	"<p>remaining guesses: " + guesses + "</p>" +
-         	"<p>Letters you have guessed so far: " + guessedLetter + "</p>";
+			//this displays the input and tracks the games progress
+			var html =
+				"<h1>The Psychic Game</h1>" +
+				"<p>Guess What Letter I am thinking</p>" +
+	         	"<p>wins: " + wins + "</p>" +
+	         	"<p>losses: " + losses + "</p>" +
+	         	"<p>remaining guesses: " + guesses + "</p>" +
+	         	"<p>Letters you have guessed so far: " + guessedLetter + "</p>";
 
-        // Set the inner HTML contents of the #game div to our html string
-        document.querySelector("#game").innerHTML = html;
+	        // Set the inner HTML contents of the #game div to our html string
+	        document.querySelector("#game").innerHTML = html;
+	    	// }
 		}			
 	</script>
 	</body>
