@@ -1,88 +1,19 @@
 <!DOCTYPE html>
 <html lang="en-us">
-	<head>
-		<title>The Psychic Game</title>
-		<meta charset="utf-8">
-	</head>
-	<body>
-		<div id="game">
-			<p>Press any button between a and h to start!</p>
-		</div>
-		<script type="text/javascript">
 
-		//the array that holds the possibilites of the computers guesses
-		var compChoices = ['a','b', 'c', 'd', 'e', 'f', 'g', 'h'];
+<head>
+    <link rel="stylesheet" href="style.css">
+    <script src="game.js"></script>
+    <title>The Psychic Game</title>
+    <meta charset="utf-8">
+</head>
 
-		//these variables initiate at the start of the game
-		var wins = 0, 
-			losses = 0, 
-			guesses = 9,
-			guessedLetter = [],
-			userGuess = null;
+<body>
+    <div class="bg">
+        <div id="game">
+            <p>Press any button take on Mentok the Mindtaker!</p>
+        </div>
+    </div>
+</body>
 
-		//this function starts the game on key up
-		document.onkeydown = function(event) {
-
-		//I have assigned my any key press to userGuess
-		userGuess = event.key,
-		guessedLetter.push(userGuess);
-
-
-		//functino for game win
-		function gameWin() {
-			guesses = 9;
-			guessedLetter = [];
-			wins++;
-			alert("You Win!");
-		}
-
-		//function for a wrong guess
-		function wrongGuess() {
-			guesses--;
-		}
-
-		//function for game loss
-		function gameLoss() {
-			guesses = 9;
-			guessedLetter = [];
-			losses++;
-			alert("game over");
-		}
-
-		//This line chooses which letter is chosen by the computer
-		compGuess = compChoices[Math.floor(Math.random() * compChoices.length)];
-
-			// if (guessedLetter.indexOf(userGuess) >= 0) {
-
-				//these commands determine the wins or losses of this game
-
-				//this is what happens when you when win
-				if (userGuess === compGuess) {
-					gameWin();
-					
-				//this is what happens when you make a wrong guess
-				} else if (userGuess !== compGuess) {
-					wrongGuess();
-					
-					//this is what happens when you lose the game
-					if (guesses === 0) {
-					gameLoss();	
-					}
-				}
-			//this displays the input and tracks the games progress
-			var html =
-				"<h1>The Psychic Game</h1>" +
-				"<p>Guess What Letter I am thinking</p>" +
-	         	"<p>wins: " + wins + "</p>" +
-	         	"<p>losses: " + losses + "</p>" +
-	         	"<p>remaining guesses: " + guesses + "</p>" +
-	         	"<p>Letters you have guessed so far: " + guessedLetter + "</p>";
-
-	        // Set the inner HTML contents of the #game div to our html string
-	        document.querySelector("#game").innerHTML = html;
-	    	// }
-		}			
-	</script>
-	</body>
-	
 </html>
